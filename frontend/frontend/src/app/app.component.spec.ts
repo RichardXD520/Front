@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from 'src/app/app.component';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { AppComponent } from './app.component';
+import { ComponentsModule } from './shared/components/components.module';
 import { HomeComponent } from './home.component';
 
 describe('AppComponent', () => {
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'frontend' title`, () => {
+  it(`should have as title 'frontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('frontend');
