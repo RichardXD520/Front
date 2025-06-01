@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductsListComponent } from './products-list.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProductsListComponent', () => {
   let component: ProductsListComponent;
@@ -8,7 +9,8 @@ describe('ProductsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductsListComponent ]
+      declarations: [ ProductsListComponent ],
+      imports: [ ModalModule.forRoot(), BrowserAnimationsModule ]
     })
     .compileComponents();
 
