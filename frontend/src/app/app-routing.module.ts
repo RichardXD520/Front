@@ -37,10 +37,3 @@ export class AppRoutingModule { }
 // filepath: src/app/views/home/home.component.spec.ts
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [ HomeComponent ],
-    imports: [ ComponentsModule ]
-  })
-  .compileComponents();
-});

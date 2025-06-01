@@ -11,10 +11,3 @@ const routes: Routes = [{ path: '', component: CajaComponent }];
 })
 export class CajaRoutingModule { }
 
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [ CajaComponent ],
-    imports: [ FormsModule ]
-  })
-  .compileComponents();
-});

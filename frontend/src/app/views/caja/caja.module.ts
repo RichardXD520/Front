@@ -19,10 +19,3 @@ import { FormsModule } from '@angular/forms';
 })
 export class CajaModule { }
 
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [ CajaComponent ],
-    imports: [ FormsModule ]
-  })
-  .compileComponents();
-});
