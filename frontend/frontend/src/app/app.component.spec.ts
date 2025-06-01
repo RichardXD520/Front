@@ -8,11 +8,7 @@ import { HomeComponent } from './home.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        ComponentsModule
-      ],
-      declarations: [AppComponent],
+      imports: [AppModule]
     }).compileComponents();
   });
 
@@ -25,14 +21,13 @@ describe('AppComponent', () => {
   it(`should have the 'frontend' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('frontend'); // Asegúrate que este valor es correcto en tu componente
+    expect(app.title).toEqual('frontend');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    // Ajusta el texto esperado según tu template real
     expect(compiled.querySelector('h1')?.textContent).toContain('frontend app is running!');
   });
 });
