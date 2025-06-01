@@ -19,3 +19,13 @@ export class ModalComponent implements OnInit {
   }
 
 }
+import { ReactiveFormsModule } from '@angular/forms';
+// ...existing code...
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    declarations: [ ProductsListComponent ],
+    imports: [ ModalModule.forRoot(), BrowserAnimationsModule, ReactiveFormsModule ]
+  })
+  .compileComponents();
+  // ...existing code...
+});
