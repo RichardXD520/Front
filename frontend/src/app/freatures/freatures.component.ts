@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './freatures.component.html',
-  styleUrl: './freatures.component.css'
+  styleUrls: ['./freatures.component.css']
 })
 export class FreaturesComponent {
 
