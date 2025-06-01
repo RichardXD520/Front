@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './shared/components/components.module';
 import { HomeComponent } from './home.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -35,6 +37,13 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('frontend app is running!');
   });
+
+  it('should render navbar', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-navbard')).toBeTruthy();
+  });
 });
 
 describe('HomeComponent', () => {
@@ -44,7 +53,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
-      imports: [ ComponentsModule ]
+      imports: [ ComponentsModule, ModalModule.forRoot(), BrowserAnimationsModule ]
     })
     .compileComponents();
 
