@@ -1,0 +1,58 @@
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Bordes para tabla cuadriculada */
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6 !important;
+}
+
+/* Colores de botones */
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+button + button {
+  margin-left: 5px;
+}

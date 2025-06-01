@@ -1,0 +1,63 @@
+<!-- Barra de búsqueda mejorada -->
+<form [formGroup]="searchForm" class="mb-3" (ngSubmit)="$event.preventDefault()">
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="bi bi-search"></i> <!-- Asegúrate de tener Bootstrap Icons o cámbialo -->
+    </span>
+    <input
+      type="text"
+      formControlName="searchControl"
+      class="form-control"
+      placeholder="Buscar producto..."
+      [class.is-invalid]="searchForm.get('searchControl')?.invalid && searchForm.get('searchControl')?.touched"
+      autocomplete="off"
+    >
+    <button class="btn btn-outline-secondary" type="button" (click)="searchForm.get('searchControl')?.setValue('')">
+      Limpiar
+    </button>
+  </div>
+  <div *ngIf="searchForm.get('searchControl')?.invalid && searchForm.get('searchControl')?.touched" class="text-danger mt-1">
+    Ingrese un término válido.
+  </div>
+</form>
+
+<!-- Cards filtradas -->
+<div class="container mt-3">
+  <div class="row g-3 mt-3">
+    <div class="col-md-4" *ngFor="let item of filteredInventory">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text flex-grow-1">{{ item.description }}</p>
+          <p><strong>Cantidad:</strong> {{ item.quantity }}</p>
+          <button
+            class="btn btn-primary mt-auto"
+            (click)="openModal(productModal, item.id)"
+          >
+            Ver detalle
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="filteredInventory.length === 0" class="text-center text-muted mt-5">
+      No se encontraron productos.
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #productModal>
+  <div class="modal-header">
+    <h5 class="modal-title">Detalles de {{ selectedItem?.name }}</h5>
+    <button type="button" class="btn-close" aria-label="Cerrar" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body" *ngIf="selectedItem">
+    <p><strong>ID:</strong> {{ selectedItem.id }}</p>
+    <p><strong>Nombre:</strong> {{ selectedItem.name }}</p>
+    <p><strong>Cantidad:</strong> {{ selectedItem.quantity }}</p>
+    <p><strong>Descripción:</strong> {{ selectedItem.description }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+  </div>
+</ng-template>

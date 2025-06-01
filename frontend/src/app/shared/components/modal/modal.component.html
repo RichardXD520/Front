@@ -1,0 +1,11 @@
+<p>inventory-modal works!</p>
+
+<h2>{{ item.name | titlecase }}</h2>
+
+<div class="inventory-details">
+  <p><strong>ID:</strong> {{ item.id }}</p>
+  <p><strong>Cantidad:</strong> {{ item.quantity }}</p>
+  <p><strong>Descripción:</strong> {{ item.description }}</p>
+</div>
+
+<button mat-button (click)="closeModal()">Cerrar</button>

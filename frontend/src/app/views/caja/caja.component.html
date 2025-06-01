@@ -1,0 +1,153 @@
+<div class="container mt-4">
+  <h2><i class="bi bi-cash-stack"></i> Gestión de Caja</h2>
+
+  <!-- Apertura de Caja -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="bi bi-box-arrow-in-right"></i> Apertura de Caja
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label for="montoApertura">Monto de Apertura</label>
+          <input type="number" class="form-control" id="montoApertura" placeholder="Ingrese monto inicial" [(ngModel)]="montoApertura" name="montoApertura" [disabled]="cajaAbierta">
+        </div>
+        <button type="button" class="btn btn-success" (click)="abrirCaja()" [disabled]="cajaAbierta">
+          <i class="bi bi-check-circle"></i> Abrir Caja
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Registro de Movimientos -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="bi bi-arrow-left-right"></i> Registrar Movimiento
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="tipoMovimiento" class="form-label">Tipo</label>
+            <select class="form-control" id="tipoMovimiento" [(ngModel)]="tipoMovimiento" name="tipoMovimiento" [disabled]="!cajaAbierta">
+              <option>Ingreso</option>
+              <option>Egreso</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="montoMovimiento" class="form-label">Monto</label>
+            <input type="number" class="form-control" id="montoMovimiento" placeholder="Monto" [(ngModel)]="montoMovimiento" name="montoMovimiento" [disabled]="!cajaAbierta">
+          </div>
+          <div class="col-md-4">
+            <label for="descripcionMovimiento" class="form-label">Descripción</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcionMovimiento"
+              placeholder="Descripción"
+              [(ngModel)]="descripcionMovimiento"
+              name="descripcionMovimiento"
+              [disabled]="!cajaAbierta">
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <button type="button" class="btn btn-primary" (click)="registrarMovimiento()" [disabled]="!cajaAbierta">
+            <i class="bi bi-plus-circle"></i> Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cierre de Caja -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="bi bi-box-arrow-right"></i> Cierre de Caja
+    </div>
+    <div class="card-body">
+      <button type="button" class="btn btn-danger" (click)="cerrarCaja()" [disabled]="!cajaAbierta">
+        <i class="bi bi-x-circle"></i> Cerrar Caja
+      </button>
+    </div>
+  </div>
+
+  <!-- Historial de Movimientos -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <i class="bi bi-clock-history"></i> Historial de Movimientos
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Monto</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mov of movimientos; let i = index">
+            <td>{{ mov.fecha | date:'short' }}</td>
+            <td>{{ mov.tipo }}</td>
+            <td>{{ mov.monto | currency:'CLP' }}</td>
+            <td>{{ mov.descripcion }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="eliminarMovimiento(i)" [disabled]="!cajaAbierta">
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!movimientos || movimientos.length === 0">
+            <td colspan="5" class="text-center text-muted py-4">
+              <i class="bi bi-info-circle"></i> No hay movimientos registrados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Cajas Registradas -->
+  <div class="card mb-3 mt-4">
+    <div class="card-header">
+      <i class="bi bi-archive"></i> Cajas Registradas
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha Apertura</th>
+            <th>Monto Apertura</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let caja of cajas">
+            <td>{{ caja.id }}</td>
+            <td>{{ caja.fechaApertura | date:'short' }}</td>
+            <td>{{ caja.montoApertura | currency:'CLP' }}</td>
+            <td>
+              <span [class.text-success]="caja.abierta" [class.text-danger]="!caja.abierta">
+                {{ caja.abierta ? 'Abierta' : 'Cerrada' }}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-info btn-sm" (click)="seleccionarCaja(caja)">Ver</button>
+              <button class="btn btn-danger btn-sm" (click)="borrarCaja(caja.id)">Borrar</button>
+              <button *ngIf="!caja.abierta" class="btn btn-warning btn-sm" (click)="reabrirCaja(caja)">
+                <i class="bi bi-arrow-repeat"></i> Reabrir
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="cajas.length === 0">
+            <td colspan="5" class="text-center text-muted py-3">No hay cajas registradas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

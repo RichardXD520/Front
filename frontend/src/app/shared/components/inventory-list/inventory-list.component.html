@@ -1,0 +1,57 @@
+<div class="inventory-list-container">
+  <h1>Artículos de Inventario</h1>
+
+  <!-- Formulario de artículo -->
+  <form (ngSubmit)="saveItem()" *ngIf="selectedItem" class="mb-4">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="selectedItem.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label>Cantidad</label>
+      <input type="number" class="form-control" [(ngModel)]="selectedItem.quantity" name="quantity" required>
+    </div>
+    <div class="form-group">
+      <label>Descripción</label>
+      <textarea class="form-control" [(ngModel)]="selectedItem.description" name="description"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+      {{ isEdit ? 'Actualizar' : 'Agregar' }}
+    </button>
+    <button type="button" class="btn btn-secondary ml-2" (click)="cancelEdit()">Cancelar</button>
+  </form>
+
+  <!-- Botón para nuevo artículo -->
+  <button class="btn btn-primary mb-3" (click)="newItem()">+ Nuevo Artículo</button>
+
+  <!-- Tabla de artículos -->
+  <div class="table-responsive" *ngIf="inventoryItems.length > 0; else noItemsTemplate">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of inventoryItems">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.description }}</td>
+          <td>
+            <button class="btn btn-sm btn-info mr-2" (click)="editItem(item)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteItem(item)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Plantilla vacía -->
+  <ng-template #noItemsTemplate>
+    <p>No se encontraron artículos de inventario.</p>
+  </ng-template>
+</div>

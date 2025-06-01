@@ -1,0 +1,37 @@
+<section class="product-banner">
+  <h2>Productos Destacados</h2>
+  <div class="banner-container">
+    <div
+      class="product-card"
+      *ngFor="let item of inventory"
+      (click)="openModal(productTemplate, item)"
+      style="cursor: pointer;"
+    >
+      <img src="https://picsum.photos/200/300?random=1" [alt]="item.name" />
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Template -->
+<ng-template #productTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ selectedItem?.name }}</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Cerrar"
+      (click)="closeModal()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p><strong>ID:</strong> {{ selectedItem?.id }}</p>
+    <p><strong>Nombre:</strong> {{ selectedItem?.name }}</p>
+    <p><strong>Descripción:</strong> {{ selectedItem?.description }}</p>
+    <p><strong>Cantidad:</strong> {{ selectedItem?.quantity }}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+  </div>
+</ng-template>
