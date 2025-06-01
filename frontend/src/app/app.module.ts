@@ -10,9 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './shared/components/components.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { CajaRoutingModule } from './caja-routing.module';
+import { BannerComponent } from './banner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
      ModalModule.forRoot(),
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    CommonModule,
+    CajaRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]  // 'AppComponent' es el componente raíz de la aplicación
