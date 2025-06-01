@@ -6,6 +6,7 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [AppComponent],
       imports: [AppModule, ComponentsModule],
     }).compileComponents();
   });

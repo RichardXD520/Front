@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CajaComponent } from './caja.component';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 
 describe('CajaComponent', () => {
   let component: CajaComponent;
@@ -8,7 +9,9 @@ describe('CajaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CajaComponent ]
+      declarations: [ CajaComponent ],
+      imports: [ ComponentsModule ]
+      imports: [ FormsModule ]
     })
     .compileComponents();
 
