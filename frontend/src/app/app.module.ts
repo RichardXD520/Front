@@ -2,47 +2,31 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // ¡Muy importante!
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ReactiveFormsModule } from '@angular/forms';
-
-// Importa el módulo que contiene el componente 'NavbardComponent' y otros
-import { ComponentsModule } from './shared/components/components.module';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { CajaRoutingModule } from './caja-routing.module';
-import { BannerComponent } from './banner.component';
+
+// Importa el módulo de componentes compartidos
+import { ComponentsModule } from './shared/components/components.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BannerComponent
+    AppComponent
+    // No declares BannerComponent aquí si ya está en ComponentsModule
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
     BrowserAnimationsModule,
-     ModalModule.forRoot(),
+    ModalModule.forRoot(),
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    CommonModule,
-    CajaRoutingModule
+    ReactiveFormsModule
+    // No agregues CommonModule ni CajaRoutingModule aquí si son de features
   ],
   providers: [],
-  bootstrap: [AppComponent]  // 'AppComponent' es el componente raíz de la aplicación
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-import { FormsModule } from '@angular/forms';
-// ...existing code...
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [ CajaComponent ],
-    imports: [ FormsModule ] // <-- Agrega esto
-  })
-  .compileComponents();
-  // ...existing code...
-});
