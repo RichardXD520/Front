@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './shared/components/components.module';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './views/home/home.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
