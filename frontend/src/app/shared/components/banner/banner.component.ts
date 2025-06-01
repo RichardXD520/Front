@@ -37,16 +37,3 @@ export class BannerComponent implements OnInit {
     this.selectedItem = null;
   }
 }
-
-beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [ ModalComponent ],
-    imports: [ ModalModule.forRoot(), BrowserAnimationsModule ]
-  })
-  .compileComponents();
-
-  fixture = TestBed.createComponent(ModalComponent);
-  component = fixture.componentInstance;
-  component.item = { name: 'Test', id: 1, quantity: 1, description: 'desc' }; // <-- Agrega esto
-  fixture.detectChanges();
-});
