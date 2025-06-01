@@ -1,35 +1,63 @@
-name: CI Frontend Angular
+name: CI - Build, Test and Publish Docker Image
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   pull_request:
-    branches: [main]
+    branches: ["main"]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/frontend
 
 jobs:
-  build-and-test:
+  build-test-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      - name: Checkout código
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: npm ci
         working-directory: frontend
 
-      - name: Ejecutar pruebas
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+      - name: Run tests
+        run: npm test -- --watch=false --browsers=ChromeHeadless
         working-directory: frontend
 
-      - name: Construir aplicación Angular
-        run: npm run build -- --configuration production
-        working-directory: frontend
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Construir imagen Docker
-        run: docker build -t frontend-app ./frontend
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: frontend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
