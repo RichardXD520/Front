@@ -38,3 +38,14 @@ import { SideBardComponent } from './side-bard/side-bard.component';
   ]
 })
 export class ComponentsModule { }
+
+import { ReactiveFormsModule } from '@angular/forms';
+// ...existing code...
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    declarations: [ ProductsListComponent ],
+    imports: [ ModalModule.forRoot(), BrowserAnimationsModule, ReactiveFormsModule ]
+  })
+  .compileComponents();
+  // ...existing code...
+});

@@ -35,3 +35,14 @@ import { BannerComponent } from './banner.component';
   bootstrap: [AppComponent]  // 'AppComponent' es el componente raíz de la aplicación
 })
 export class AppModule { }
+
+import { FormsModule } from '@angular/forms';
+// ...existing code...
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    declarations: [ CajaComponent ],
+    imports: [ FormsModule ] // <-- Agrega esto
+  })
+  .compileComponents();
+  // ...existing code...
+});

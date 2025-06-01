@@ -32,3 +32,15 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+// Ejemplo para HomeComponent
+// filepath: src/app/views/home/home.component.spec.ts
+import { ComponentsModule } from 'src/app/shared/components/components.module';
+
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
+    declarations: [ HomeComponent ],
+    imports: [ ComponentsModule ]
+  })
+  .compileComponents();
+});
