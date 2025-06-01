@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BannerComponent } from './banner.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('BannerComponent', () => {
   let component: BannerComponent;
@@ -8,7 +10,8 @@ describe('BannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BannerComponent ]
+      declarations: [ BannerComponent ],
+      imports: [ ModalModule.forRoot(), BrowserAnimationsModule ]
     })
     .compileComponents();
 
